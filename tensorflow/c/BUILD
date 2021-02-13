@@ -155,6 +155,7 @@ tf_cuda_library(
         "tf_file_statistics.h",
         "tf_status.h",
         "tf_tensor.h",
+        "tf_tstring.h",
     ],
     copts = tf_copts(),
     visibility = ["//visibility:public"],
@@ -165,6 +166,7 @@ tf_cuda_library(
         ":tf_status_internal",
         ":tf_file_statistics",
         ":tf_tensor_internal",
+        ":tf_tstring",
     ] + select({
         "//tensorflow:with_xla_support": [
             "//tensorflow/compiler/tf2xla:xla_compiler",
@@ -297,6 +299,22 @@ cc_library(
             "//tensorflow/core:lib",
         ],
     }),
+)
+
+cc_library(
+    name = "tf_tstring",
+    srcs = [
+        "tf_tstring.cc",
+        "//tensorflow/core/platform:ctstring"
+    ],
+    hdrs = [
+        "c_api_macros.h",
+        "tf_datatype.h",
+        "tf_status.h",
+        "tf_tensor.h",
+        "tf_tstring.h",
+    ],
+    visibility = ["//visibility:public"]
 )
 
 cc_library(
